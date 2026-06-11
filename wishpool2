@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>魔法許願池</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Microsoft JhengHei",sans-serif;
+    height:100vh;
+    background:linear-gradient(#87ceeb,#dff6ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    margin-bottom:20px;
+    color:#1f4e79;
+}
+
+.pool{
+    width:380px;
+    height:220px;
+    background:radial-gradient(circle,#5bc0ff,#0077b6);
+    border-radius:50%;
+    border:10px solid #5f9ea0;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.pool::after{
+    content:"";
+    position:absolute;
+    width:120%;
+    height:120%;
+    top:-10%;
+    left:-10%;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.3);
+}
+
+.coin{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:gold;
+    border:4px solid #d4af37;
+    position:absolute;
+    top:-60px;
+    left:165px;
+    display:none;
+    box-shadow:0 0 15px rgba(255,215,0,.7);
+}
+
+.throw{
+    animation:dropCoin 1.2s ease-in forwards;
+}
+
+@keyframes dropCoin{
+    0%{
+        top:-60px;
+        transform:rotate(0deg);
+    }
+
+    80%{
+        top:120px;
+        transform:rotate(720deg);
+    }
+
+    100%{
+        top:145px;
+        transform:rotate(900deg) scale(0.2);
+        opacity:0;
+    }
+}
+
+button{
+    margin-top:25px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:#ff9800;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#f57c00;
+    transform:scale(1.05);
+}
+
+#wishResult{
+    margin-top:20px;
+    font-size:18px;
+    color:#004d40;
+    min-height:30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>✨ 魔法許願池 ✨</h1>
+
+    <div class="pool">
+        <div class="coin" id="coin"></div>
+    </div>
+
+    <button onclick="throwCoin()">
+        🪙 投入硬幣
+    </button>
+
+    <div id="wishResult"></div>
+
+</div>
+
+<script>
+
+function throwCoin(){
+
+    const coin = document.getElementById("coin");
+
+    coin.style.display = "block";
+    coin.style.opacity = "1";
+
+    coin.classList.remove("throw");
+
+    void coin.offsetWidth;
+
+    coin.classList.add("throw");
+
+    setTimeout(() => {
+
+        let wish = prompt("🌟 請輸入您的願望：");
+
+        if(wish && wish.trim() !== ""){
+
+            document.getElementById("wishResult").innerHTML =
+                "✨ 您的願望已投入許願池：<br><b>" +
+                wish +
+                "</b>";
+
+        }else{
+
+            document.getElementById("wishResult").innerHTML =
+                "💧 您沒有輸入願望";
+
+        }
+
+    },1200);
+}
+
+</script>
+
+</body>
+</html>
